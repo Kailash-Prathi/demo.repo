@@ -1,1 +1,2 @@
 It is just for demo
+This is a new line.
