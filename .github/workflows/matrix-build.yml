@@ -1,0 +1,31 @@
+name: Matrix Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: matrix-1866eb8
+        id: matrix-1866eb8
+        run: echo "Building for python version ${{ matrix.python-version }}"
+      - name: Generate build artifact
+        run: echo "Build output for python version ${{ matrix.python-version }}" > output.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-1866eb8-py${{ matrix.python-version }}
+          path: output.txt
