@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
+        node-version: [14, 16, 18]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          python-version: ${{ matrix.python-version }}
+          node-version: ${{ matrix.node-version }}
       - name: matrix-1866eb8
         id: matrix-1866eb8
-        run: echo "Building for python version ${{ matrix.python-version }}"
+        run: echo "Building for node version ${{ matrix.node-version }}"
       - name: Generate build artifact
-        run: echo "Build output for python version ${{ matrix.python-version }}" > output.txt
+        run: echo "Build output for node version ${{ matrix.node-version }}" > output.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-1866eb8-py${{ matrix.python-version }}
+          name: build-1866eb8-node${{ matrix.node-version }}
           path: output.txt
